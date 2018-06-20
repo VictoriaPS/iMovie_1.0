@@ -8,64 +8,22 @@
     <script src="scripts/jquery-3.2.1.min.js"></script>
     <script src="scripts/jquery-migrate-3.0.0.min.js"></script>
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-    <script src="scripts/localstoragedb.js"></script>
-    <script src="scripts/localstoragedb.min.js"></script>
     <script src="scripts/mycinema.js"></script>
     <title>MY Cinema</title>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         $(document).on('mobileinit', function () {
             $.mobile.defaultPageTransition = "slide";
         });
-    </script>
-    <script type="text/javascript">
-        //_________________ LOGIN PAGE ________________
-        $(document).on("pageinit", "#LoginPage", function (event) {
-            createDB();
-            forDebug();
-            wireEventsLoginPage();
-        });
+    </script>-->
 
-
-        function createDB() {
-            var DB = new localStorageDB("UsersList", localStorage);
-            DB.createTable("Users", ["Name", "Pass"]);
-            DB.insert("Users", { Name: "Manager", Pass: 1234 });
-            DB.commit();
-
-        }
-
-
-        function forDebug() {
-            $('#LPName').val('samaa');
-            $('#LPPassword').val('samaa24');
-        }
-
-
-
-        function wireEventsLoginPage() {
-            $('#LoginBtn').on('tap', function () {
-                if ($('#LPName').val().length == 5 && $('#LPPassword').val().length == 7) {
-                    if (typeof (Storage) !== "undefined") {
-                        sessionStorage.Sesname = $('#LPName').val();
-                        sessionStorage.SesPass = $('#LPPassword').val();
-                    }
-                    $.mobile.changePage('#AboutPage', { 'transition': 'flip' });
-                }
-                else {
-                    alert('wrong Name or Password');
-                }
-            });
-
-
-
-
-    </script>
 </head>
 <body>
+
     <!-- Movies Choices -->
     <div data-role="page" class="ui-btn-right" id="home">
         <div data-role="header" class="ui-btn ui-btn-b">
-            <a href="#home" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <a href="#home" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <a href="#ManagerHome" id="btnManager" data-role="button" class="ui-btn-left" data-icon="star" style="visibility:hidden" data-iconpos="notext"></a>
             <h1>iMovie</h1>
             <a href="#LoginPage" data-role="button">Login</a>
         </div>
@@ -114,6 +72,145 @@
                 </div>
             </div>
         </div>
+        <div data-role="footer" class="ui-btn ui-btn-b">
+            <h4>&copy; iMovie</h4>
+        </div>
+    </div>
+
+    <!-- manager !!!!!!! Movies Choices  -->
+    <div data-role="page" class="ui-btn-right" id="homeManager">
+        <div data-role="header" class="ui-btn ui-btn-b">
+            <a href="#homeManager" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <h1 id="managerHeader">iMovie man</h1>
+            <!--<a href="#LoginPage" data-role="button">Login</a>-->
+        </div>
+
+        <div data-role="content">
+            <center class="ui-btn ui-btn-b">
+                <img src="frojector.jpg" style="max-width:30%;max-height:15%;">
+                <h2>WELCOME TO OUR CINEMA.</h2>
+                <form class="ui-filterable">
+                    <input id="filterBasic-input" data-type="search">
+                </form>
+            </center>
+            <br>
+            <div data-role="listview" class="ui-btn ui-btn-b" data-filter="true" data-input="#filterBasic-input">
+                <div data-role="collapsible" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="matrix.png" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> The Matirx</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    It depicts a dystopian future in which reality as perceived by most humans is actually a simulated reality called "the Matrix", created by sentient machines to subdue the human population, while their bodies' heat and electrical activity are used as an energy source. Computer programmer Neo learns this truth and is drawn into a rebellion against the machines, which involves other people who have been freed from the "dream world."<br />
+                    <a>Starring:</a><br />Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving.<br />
+                    <a>Run Time:</a><br />136 minutes.
+                    <button id="theMatrix" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+                <div data-role="collapsible" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="shawshank.jpg" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> The Shawshank Redemption</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    It tells the story of banker Andy Dufresne , who is sentenced to life in Shawshank State Penitentiary for the murder of his wife and her lover, despite his claims of innocence. Over the following two decades, he befriends a fellow prisoner, contraband smuggler Ellis "Red" Redding , and becomes instrumental in a money laundering operation led by the prison warden Samuel Norton
+                    <br />
+                    <a>Starring:</a><br />Tim Robbins, Morgan Freeman, Bob Gunton.<br />
+                    <a>Run Time:</a><br />142 minutes.
+                    <button id="shawshankRed" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+                <div data-role="collapsible" class="btn" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="fightclub.jpg" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> Fight Club</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    Norton plays the unnamed protagonist, referred to as the narrator, who is discontented with his white-collar job. He forms a "fight club" with soap maker Tyler Durden, played by Pitt, and they are joined by men who also want to fight recreationally. The narrator becomes embroiled in a relationship with Durden and a dissolute woman, Marla Singer, played by Bonham Carter.
+                    <br />
+                    <a>Starring:</a><br />Brad Pitt, Edward Norton,Helena Bonham Carter.<br />
+                    <a>Run Time:</a><br />139 minutes.
+                    <button id="fightClub" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" class="ui-btn ui-btn-b">
+            <h4>&copy; iMovie</h4>
+        </div>
+    </div>
+
+
+    <!--client page  -  view orders-->
+    <div data-role="page" class="ui-btn-right" id="viewClientOrder">
+        <div data-role="header" class="ui-btn ui-btn-b">
+            <a href="#home" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+
+            <h1>iMovie</h1>
+            <a href="#LoginPage" data-role="button">Login</a>
+        </div>
+
+        <div data-role="content">
+            <br />
+            <p style="text-align:center"> there is :<label id="number"></label> orders.</p>
+            <br />
+            <table id="ordersDetails"></table>
+        </div>
+        <div data-role="footer" class="ui-btn ui-btn-b">
+            <h4>&copy; iMovie</h4>
+        </div>
+    </div>
+
+    <!-- manager page - insert screening-->
+    <div data-role="page" class="ui-btn-right" id="Maneger_insertScreening">
+        <div data-role="header" class="ui-btn ui-btn-b">
+            <a href="#home" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <h1>iMovie </h1>
+            <a href="#LoginPage" data-role="button">Login</a>
+        </div>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#Manger_insertMovie">Insert movie</a></li>
+                <li><a href="#Maneger_insertScreening">Insert screen</a></li>
+                <li><a href="#viewClientOrder">View orders</a></li>
+            </ul>
+        </div>
+        <center>
+            <div>
+                insert screening
+            </div>
+        </center>
+
+        <center>
+            <div data-role="content">
+                <fieldset data-role="fieldcontain">
+                    <legend>screening details:</legend>
+                    <label for="slctMovieName">movie</label>
+                    <select id="slctMovieName"></select>
+                    <!--<input type="text" id="movieName" />-->
+                    <br />
+                    <label for="screenDate">date</label>
+                    <input type="date" id="screenDate" />
+                    <br />
+                    <label for="screenTime">time</label>
+                    <input type="time" id="screenTime" />
+                    <br />
+                    <label for="screenCinema">theater</label>
+                    <select id="screenCinema">
+                        <option selected value="null">select theater</option>
+                        <option value="Cinema City">Cinema City</option>
+                        <option value="Yes Planet">Yes Planet</option>
+                        <option value="Lev Cinema">Lev Cinema</option>
+                        <option value="Globs Max">Globus Max</option>
+                    </select>
+                    <br />
+                    <label for="screenType">type</label>
+                    <select id="screenType">
+                        <option selected value="null">select type</option>
+                        <option value="Regular">Regular</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Late Night">Late Night</option>
+                    </select>
+                    <br />
+                    <button id="btnSaveScreen" style="width:20%; margin-left:35%;" onclick="insertScreen()">save</button>
+                </fieldset>
+            </div>
+        </center>
         <div data-role="footer" class="ui-btn ui-btn-b">
             <h4>&copy; iMovie</h4>
         </div>
@@ -190,7 +287,7 @@
             <div style="text-align:center">
                 <center>
                     Don't have an account yet?-->
-                    <a href="#RegisterPage">click here</a>
+                    <a href="#RegisterPage">click &nbsp;here</a>
                 </center>
             </div>
         </div>
@@ -208,33 +305,26 @@
         </div>
 
         <div data-role="content" onchange="pic()" style="text-align:center">
+            You Chose:
             <h2 id="movie" style="text-align:center"></h2>
             <div id="pichere">
-                <img id="poster" src="matrix.png" width="45%" height="40%">
+                <img id="poster" src="matrix.png" style="height:45%; width:35%">
             </div>
             <div id="stamSP"></div>
         </div>
-        <div>
-            <center class="ui-btn ui-btn-b">
-                <center>
-                    <b style="text-align:center"> Choose Cinema:</b>
-                    <div data-role="fieldcontain" style="height:70%; width:70%;">
-                        <select>
-                            <option value="Cinema city">Cinema City</option>
-                            <option value="Yes Planet">Yes Planet</option>
-                            <option value="Lev Cinema">Lev Cinema</option>
-                            <option value="Globus Max">Globus Max</option>
-                        </select>
-                    </div>
-                </center>
-            </center>
-        </div>
-
-
-        <div data-role="footer" data-theme="d" class="ui-btn ui-btn-b">
-            <div> Tickets:</div>
-            <input type="number" id="numOftic" placeholder="insert number of tickets" value="Number of Tickets">
-            <div>
+        <div data-role="footer" style="border-style:solid" class="ui-btn ui-btn-b">
+            <center>
+                <div> Tickets:</div>
+                <input type="number" id="numOftic" placeholder="insert number of tickets" value="Number of Tickets">
+                <b style="text-align:center"> Choose Cinema:</b>
+                <div data-role="fieldcontain" style="height:70%; width:70%;">
+                    <select>
+                        <option value="Cinema city">Cinema City</option>
+                        <option value="Yes Planet">Yes Planet</option>
+                        <option value="Lev Cinema">Lev Cinema</option>
+                        <option value="Globus Max">Globus Max</option>
+                    </select>
+                </div>
                 <center>
                     <b style="text-align:center"> Choose Ticket Type:</b>
                     <div data-role="fieldcontain" style="height:70%; width:70%;">
@@ -245,22 +335,22 @@
                         </select>
                     </div>
                 </center>
-            </div>
-            <div>Date:</div><input type="date" id="date">
-            <div>Hour:</div><input type="time" id="hour">
-            <form>
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <input type="checkbox" name="pop" id="pop">
-                    <label for="pop" class="ui-btn ui-btn-b">Popcorn</label>
-                    <input type="checkbox" name="cola" id="cola">
-                    <label for="cola" class="ui-btn ui-btn-b">Coca-Cola</label>
-                    <input type="checkbox" name="snacks" id="snacks">
-                    <label for="snacks" class="ui-btn ui-btn-b">Snickers</label>
-                </fieldset>
-            </form>
-            <center> <a href="#Seats" class="ui-btn ui-btn-b" data-role="button" data-rel="next">Next</a></center>
+                <div>Date:</div><input type="date" id="date">
+                <div>Hour:</div><input type="time" id="hour">
 
+                <form>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 
+                        <input type="checkbox" name="pop" id="pop">
+                        <label for="pop">Popcorn</label>
+                        <input type="checkbox" name="cola" id="cola">
+                        <label for="cola">Coca-Cola</label>
+                        <input type="checkbox" name="snacks" id="snacks">
+                        <label for="snacks">Snickers</label>
+                    </fieldset>
+                </form>
+                <center class="ui-btn ui-btn-b"> <a href="#Seats" class="ui-btn ui-btn-b">order</a></center>
+            </center>
         </div>
 
         <div data-role="footer" class="ui-btn ui-btn-b" data-position="fixed">
@@ -274,7 +364,7 @@
         <div data-role="header" class="ui-btn ui-btn-b">
             <a href="#home" data-role="button" data-icon="home" data-iconpos="notext"></a>
             <h5>Please choose seats:</h5>
-            <a href="#" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext"></a>
+            <a href="#buy" data-role="button" data-icon="back" data-iconpos="notext"></a>
 
         </div>
         <center>
@@ -336,7 +426,9 @@
                         </tbody>
                     </table>
                 </div>
-                <center class="ui-btn ui-btn-b"> <a href="#order" class="ui-btn ui-btn-b" data-role="button" data-rel="next">Next</a></center>
+                <center class="ui-btn ui-btn-b">
+                    <button id="order" class="ui-btn ui-btn-b" onclick="update()">Next</button>
+                </center>
             </div>
         </center>
         <div data-role="footer" class="ui-btn ui-btn-b">
@@ -436,14 +528,14 @@
             <br /><br />
             <fieldset data-role="fieldcontain" style="border: 1px solid black; padding: 50px;">
                 <legend>Please Enter details</legend>
-                <label for="LPName">Name:</label>
+                <label for="RName">Name:</label>
                 <input type="text" id="RName" name="text" placeholder="insert your name..." /><br />
-                <label for="LPPassword">Password: </label>
+                <label for="RPassword">Password: </label>
                 <input type="text" id="RPassword" name="number" placeholder="insert your password..." /><br />
-                <label for="LPPassword">Password: </label>
+                <label for="CRPassword">Password: </label>
                 <input type="text" id="CRPassword" name="number" placeholder="Confirm password..." /><br />
                 <div style="text-align:center">
-                    <a href="#home" data-role="button" id="LoginBtn" data-mini="true" data-inline="true" data-icon="check" data-iconpos="bottom">Login</a>
+                    <a href="#home" data-role="button" id="RegisterBtn" data-mini="true" data-inline="true" data-icon="check" data-iconpos="bottom">Login</a>
                 </div>
             </fieldset>
         </div>
@@ -452,6 +544,58 @@
         </div>
     </div>
 
+    <!--manger page - insert movie-->
+    <div data-role="page" id="Manger_insertMovie">
+        <center>
+            <div data-role="header">
+                insert movie
+            </div>
+        </center>
+        <center>
+            <div data-role="content">
+                <fieldset data-role="fieldcontain" style="background-color:white">
+                    <legend>movie details:</legend>
+                    <label for="MovieName">movie name</label>
+                    <input type="text" id="MovieName" />
+                    <br />
+                    <label for="MovieSummray">movie summary</label>
+                    <input type="text" id="MovieSummray" />
+                    <br />
+                    <label for="MovieActors">movie actors</label>
+                    <input type="text" id="MovieActors" />
+                    <br />
+                    <label for="MovieDirector">movie actors</label>
+                    <input type="text" id="MovieDirector" />
+                    <br />
+                    <label for="MovieLength">movie length</label>
+                    <input type="text" id="MovieLength" />
+                    <br />
+                    <label for="MovieGenre">movie genre</label>
+                    <input type="text" id="MovieGenre" />
+                    <br />
+                    <label for="MoviePremiereDate">movie premiere date</label>
+                    <input type="date" id="MoviePremiereDate" />
+                    <br />
+                    <label for="MovieRestirctedViewingAge">movie restricted viewing age</label>
+                    <input type="text" id="MovieRestirctedViewingAge" />
+                    <br />
+                    <label for="uploadpic">up load picture</label>
+                    <input type="file" id="uploadpic" />
+                    <br />
+                    <label for="uploadvid">up load trailer </label>
+                    <input type="file" id="uploadvid" />
+                    <br />
+                    <br />
+                    <button id="btnSaveMovie" style="width:20%; margin-left:35%;" onclick="insertMovie()">save</button>
+
+                </fieldset>
+            </div>
+        </center>
+        <div data-role="footer">
+            <h1> &copy; imovie</h1>
+        </div>
+    </div>
+
+
 </body>
 </html>
-
