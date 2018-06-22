@@ -19,9 +19,15 @@ localStorage.users = JSON.stringify(users);
 //_________________ LOGIN PAGE ________________
 {
     $(document).on("pageinit", "#LoginPage", function (event) {
+        EZ();
         wireEventsLoginPage();
     });
 
+    function EZ() {
+        $('#LPName').val('admin');
+        $('#LPPassword').val('admin');
+
+    }
 
 
     function wireEventsLoginPage() {
@@ -29,8 +35,10 @@ localStorage.users = JSON.stringify(users);
             $('#LoginBtn').on('tap', function () {
                 users = JSON.parse(localStorage.users);
                 var user = { name: $('#LPName').val(), Password: $('#LPPassword').val() };
+                console.log(user.name + user.Password);
                 if (user.name == "admin") {
-                    document.gestElementById("managerHeader").innerHTML = "Hello " + user.name;
+                    console.log("in Admin!");
+                    document.getElementById("managerHeader").innerHTML = "Hello " + user.name;
                     location.replace('#homeManager');
                 }
                  
