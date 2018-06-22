@@ -19,14 +19,77 @@
 
 </head>
 <body>
+    <!-- Movies Choices- General - no login -->
+    <div data-role="page" class="ui-btn-right" id="homeGeneral">
+        <div data-role="header" class="ui-btn ui-btn-b">
+            <a href="#homeGeneral" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <h1>iMovie</h1>
+            <a href="#LoginPage" data-role="button">Login</a>
+        </div>
 
-    <!-- Movies Choices -->
+        <div data-role="content">
+            <center class="ui-btn ui-btn-b">
+                <img src="frojector.jpg" style="max-width:30%;max-height:15%;">
+                <h2>WELCOME TO OUR CINEMA.</h2>
+                <form class="ui-filterable">
+                    <input id="filterBasic-input" data-type="search">
+                </form>
+            </center>
+            <br>
+            <div data-role="listview" class="ui-btn ui-btn-b" data-filter="true" data-input="#filterBasic-input">
+                <div data-role="collapsible" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="matrix.png" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> The Matirx</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    It depicts a dystopian future in which reality as perceived by most humans is actually a simulated reality called "the Matrix", created by sentient machines to subdue the human population, while their bodies' heat and electrical activity are used as an energy source. Computer programmer Neo learns this truth and is drawn into a rebellion against the machines, which involves other people who have been freed from the "dream world."<br />
+                    <a>Starring:</a><br />Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving.<br />
+                    <a>Run Time:</a><br />136 minutes.
+                    <button id="theMatrix" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+                <div data-role="collapsible" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="shawshank.jpg" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> The Shawshank Redemption</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    It tells the story of banker Andy Dufresne , who is sentenced to life in Shawshank State Penitentiary for the murder of his wife and her lover, despite his claims of innocence. Over the following two decades, he befriends a fellow prisoner, contraband smuggler Ellis "Red" Redding , and becomes instrumental in a money laundering operation led by the prison warden Samuel Norton
+                    <br />
+                    <a>Starring:</a><br />Tim Robbins, Morgan Freeman, Bob Gunton.<br />
+                    <a>Run Time:</a><br />142 minutes.
+                    <button id="shawshankRed" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+                <div data-role="collapsible" class="btn" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d">
+                    <h1>
+                        <img src="fightclub.jpg" style="max-width:10%;max-height:10%;" /><span style="vertical-align: 17px;"> Fight Club</span>
+                    </h1>
+                    <a>Synopsis:</a><br />
+                    Norton plays the unnamed protagonist, referred to as the narrator, who is discontented with his white-collar job. He forms a "fight club" with soap maker Tyler Durden, played by Pitt, and they are joined by men who also want to fight recreationally. The narrator becomes embroiled in a relationship with Durden and a dissolute woman, Marla Singer, played by Bonham Carter.
+                    <br />
+                    <a>Starring:</a><br />Brad Pitt, Edward Norton,Helena Bonham Carter.<br />
+                    <a>Run Time:</a><br />139 minutes.
+                    <button id="fightClub" class="ui-btn ui-btn-b" style="width:20%; margin: auto;" onclick="wireEvents()">buy</button>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" class="ui-btn ui-btn-b">
+            <h4>&copy; iMovie</h4>
+        </div>
+    </div>
+    <!-- Movies Choices- Client -->
     <div data-role="page" class="ui-btn-right" id="home">
         <div data-role="header" class="ui-btn ui-btn-b">
             <a href="#home" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
-            <a href="#ManagerHome" id="btnManager" data-role="button" class="ui-btn-left" data-icon="star" style="visibility:hidden" data-iconpos="notext"></a>
             <h1>iMovie</h1>
-            <a href="#LoginPage" data-role="button">Login</a>
+            <ul id="menu-right" data-role="menu">
+                <li>
+                    <span data-role="button" data-icon="arrow-d" data-iconpos="right">Actions</span>
+                    <ul data-role="listview" data-inset="true">
+                        <li data-icon="false">Option B1</li>
+                        <li data-icon="false">Option B2</li>
+                    </ul>
+                </li>
+            </ul>
+
         </div>
 
         <div data-role="content">
@@ -82,8 +145,14 @@
     <div data-role="page" class="ui-btn-right" id="homeManager">
         <div data-role="header" class="ui-btn ui-btn-b">
             <a href="#homeManager" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
-            <h1 id="managerHeader">iMovie man</h1>
-            <!--<a href="#LoginPage" data-role="button">Login</a>-->
+            <h1 id="managerHeader">iMovie</h1>
+            <a href="#home" data-role="button" onclick="logOut()">Logout</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#Manger_insertMovie">insert movie</a></li>
+                    <li><a href="#Maneger_insertScreening">insert screening</a></li>
+                </ul>
+            </div>
         </div>
 
         <div data-role="content">
@@ -159,17 +228,15 @@
     <!-- manager page - insert screening-->
     <div data-role="page" class="ui-btn-right" id="Maneger_insertScreening">
         <div data-role="header" class="ui-btn ui-btn-b">
-            <a href="#home" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
-            <h1>iMovie </h1>
-            <a href="#LoginPage" data-role="button">Login</a>
-        </div>
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#Manger_insertMovie">Insert movie</a></li>
-                <li><a href="#Maneger_insertScreening">Insert screen</a></li>
-                <li><a href="#viewClientOrder">View orders</a></li>
-            </ul>
+            <a href="#homeManager" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <h1 id="managerHeader">iMovie</h1>
+            <a href="#LoginPage" data-role="button">Logout</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#Manger_insertMovie">insert movie</a></li>
+                    <li><a href="#Maneger_insertScreening">insert screening</a></li>
+                </ul>
+            </div>
         </div>
         <center>
             <div>
@@ -548,8 +615,16 @@
     <!--manger page - insert movie-->
     <div data-role="page" id="Manger_insertMovie">
         <center>
-            <div data-role="header">
-                insert movie
+            <div data-role="header" class="ui-btn ui-btn-b">
+                <a href="#homeManager" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+                <h1 id="managerHeader">iMovie</h1>
+                <a href="#LoginPage" data-role="button">Logout</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#Manger_insertMovie">insert movie</a></li>
+                        <li><a href="#Maneger_insertScreening">insert screening</a></li>
+                    </ul>
+                </div>
             </div>
         </center>
         <center>

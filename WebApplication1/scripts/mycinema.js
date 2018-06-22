@@ -1,4 +1,4 @@
-﻿
+﻿const snacksPrice = 5;
 // all the local storage memory
 var cinema = new Array("Cinema City", "Yes Planet", "Lev Cinema", "lobus Max");
 var movies = new Array(); // the set of all the movies in the site.
@@ -16,6 +16,12 @@ localStorage.cinema = JSON.stringify(cinema);
 localStorage.movies = JSON.stringify(movies);
 localStorage.users = JSON.stringify(users);
 
+//______________logout_______________
+function logOut() {
+    loginUser = null;
+    console.log("the manafer is out" + loginUser);
+}
+
 //_________________ LOGIN PAGE ________________
 {
     $(document).on("pageinit", "#LoginPage", function (event) {
@@ -24,7 +30,7 @@ localStorage.users = JSON.stringify(users);
     });
 
     function EZ() {
-        $('#LPName').val('admin');
+        $('#LPName').val('admino');
         $('#LPPassword').val('admin');
 
     }
@@ -52,7 +58,7 @@ localStorage.users = JSON.stringify(users);
                             localStorage.loginUser = loginUser;
                             console.log(loginUser.name + loginUser.Password);
                         }
-                        location.replace('#homeManager');
+                            location.replace('#home');
                     }
                     else {
                         alert('wrong Name or Password');
@@ -274,7 +280,7 @@ localStorage.users = JSON.stringify(users);
             str += 'Snickers ';
             i++;
         }
-        i = i * 5 + ($('#numOftic').val()) * 10;
+        i = i * snacksPrice + ($('#numOftic').val()) * 10;
         $('#ex').text(str);
         $('#price').text(i + '$');
         location.replace('#order');
