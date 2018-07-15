@@ -11,11 +11,6 @@
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="scripts/mycinema.js"></script>
     <title>MY Cinema</title>
-    <!--<script type="text/javascript">
-        $(document).on('mobileinit', function () {
-            $.mobile.defaultPageTransition = "slide";
-        });
-    </script>-->
 
 </head>
 <body>
@@ -75,21 +70,19 @@
             <h4>&copy; iMovie</h4>
         </div>
     </div>
-    <!-- Movies Choices- Client -->
+
+
+    <!--  Client Home - Movies Choices -->
     <div data-role="page" class="ui-btn-right" id="home">
 
         <div data-role="header" class="ui-btn ui-btn-b">
             <a href="#home" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
-            <h1>iMovie</h1>
-            <a href="#menu" data-role="button" data-rel="popup">Menu</a>  
-            <div id="menu" data-role="popup">
-                <ul data-role="listview" data-inset="true">
-                    <li><a href="whatever">selection 1</a></li>
-                    <li><a href="whatever">selection 2</a></li>
-                </ul>
+            <h1>iMovie - User Page</h1>
+            <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                <a href="#MyOrders" data-role="button">My Orders</a>
+                <a href="#home" data-role="button" onclick="logOut()">Logout</a>
             </div>
         </div>
-
 
         <div data-role="content">
             <center class="ui-btn ui-btn-b">
@@ -140,6 +133,32 @@
         </div>
     </div>
 
+    <!-- Orders Page- Client -->
+    <div data-role="page" id="MyOrders">
+        <div data-role="header" class="ui-btn ui-btn-b">
+            <a href="#home" id="CHomebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
+            <h1 id="ClientHeader">iMovie</h1>
+            <a href="#home" data-role="button" onclick="logOut()">Logout</a>
+            <div data-role="content">
+                <h2>Content</h2>
+                <table id="table" style="border: 1px solid black; width: 100% ; text-align:center">
+                    <tr>
+                        <th>Movie</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Cinema</th>
+                        <th>Status</th>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div data-role="footer" class="ui-btn ui-btn-b">
+                <h4>&copy; iMovie</h4>
+            </div>
+        </div>
+    </div>
+
     <!-- manager !!!!!!! Movies Choices  -->
     <div data-role="page" class="ui-btn-right" id="homeManager">
         <div data-role="header" class="ui-btn ui-btn-b">
@@ -148,8 +167,9 @@
             <a href="#home" data-role="button" onclick="logOut()">Logout</a>
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#Manger_insertMovie">insert movie</a></li>
-                    <li><a href="#Maneger_insertScreening">insert screening</a></li>
+                    <li><a href="#Manger_insertMovie">Insert movie</a></li>
+                    <li><a href="#Maneger_insertScreening">Insert screening</a></li>
+
                 </ul>
             </div>
         </div>
