@@ -77,20 +77,19 @@
     </div>
     <!-- Movies Choices- Client -->
     <div data-role="page" class="ui-btn-right" id="home">
+
         <div data-role="header" class="ui-btn ui-btn-b">
             <a href="#home" id="Homebtn" data-role="button" class="ui-btn-left" data-icon="home" data-iconpos="notext"></a>
             <h1>iMovie</h1>
-            <ul id="menu-right" data-role="menu">
-                <li>
-                    <span data-role="button" data-icon="arrow-d" data-iconpos="right">Actions</span>
-                    <ul data-role="listview" data-inset="true">
-                        <li data-icon="false">Option B1</li>
-                        <li data-icon="false">Option B2</li>
-                    </ul>
-                </li>
-            </ul>
-
+            <a href="#menu" data-role="button" data-rel="popup">Menu</a>  
+            <div id="menu" data-role="popup">
+                <ul data-role="listview" data-inset="true">
+                    <li><a href="whatever">selection 1</a></li>
+                    <li><a href="whatever">selection 2</a></li>
+                </ul>
+            </div>
         </div>
+
 
         <div data-role="content">
             <center class="ui-btn ui-btn-b">
